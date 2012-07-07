@@ -18,6 +18,7 @@ int main( int argc, const char* argv[] )
 
 	printf( "\nSoftware for adquiring and process iSight images\n\n" );
 	printf( "Testing purposes -- MacBook Late 2008\n");
+	// test Line for Google Code 	
 
 	frame = cvQueryFrame(capture);	
 	cvShowImage("2seeWin", frame );	
