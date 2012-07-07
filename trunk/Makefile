@@ -26,19 +26,23 @@ C_SRC := \
 
 #-- Tools
 
-CC := gcc
-CXX := g++
+BITTINESS = -m64
+CC := gcc ${BITTINESS}
+CXX := g++ ${BITTINESS}
+LD := g++
 OPENCV = $(shell pkg-config --libs opencv)
+OPENCVCFL = $(shell pkg-config opencv --cflags)
+OBJ := $(C_SRC:%.c=%.o) $(CXX_SRC:%.cpp=%.o)
 
 #-- Flags
 
-CFLAGS := -I/opt/local/include
+CFLAGS := -I/opt/local/include 
 DEPS = bufferImg.hpp
 CXXFLAGS := $(CFLAGS)
-LDLIBS := $(OPENCV) 
+LDLIBS := $(OPENCV) -arch x86_64
 
 $(TARGET): $(OBJ)
-	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(OPENCVCFL)
 
 
 bin: $(TARGET)
