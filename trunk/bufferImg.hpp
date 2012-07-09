@@ -1,6 +1,11 @@
-class imgBuffer
+#include <stdio.h>
+#include <opencv2/opencv.hpp>
+#include <pthread.h>
+
+
+class bufferImg
 {
-	IplImage  *bufferImg;
+	IplImage  *bufferImagenes;
 	int elementosMaximos, inPtr, outPtr, cuentaNum;
 	
 	// Mecanismo para bloquear variables que vayan dentro de mutedBuff lock XXX unlock
@@ -15,8 +20,9 @@ class imgBuffer
 	pthread_cond_t bufLleno, bufVacio;
 	
 	public:
-		imgBuffer(void);
+		bufferImg(void);
+		~bufferImg(void);
 		void pushData(IplImage imgData);
 		IplImage popData(void);
 
-}
+};
