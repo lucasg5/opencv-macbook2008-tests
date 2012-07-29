@@ -12,24 +12,30 @@ int main( int argc, const char* argv[] )
 	int       key = 0;
 	cvNamedWindow("2seeWin", CV_WINDOW_AUTOSIZE);
 
-	capture = cvCaptureFromCAM( 0 );
+	//capture = cvCaptureFromCAM( 0 );
 
 	if(!capture) {
 	printf("\n Cannot open iSight\n");
-	return 1;	
+	//return 1;	
 	}
 
 	printf( "\nSoftware for adquiring and process iSight images\n\n" );
 	printf( "Testing purposes -- MacBook Late 2008\n"); 	
 
+	while(1)
+	{
+	capture = cvCaptureFromCAM( 0 );
 	frame = cvQueryFrame(capture);	
-	cvShowImage("2seeWin", frame );	
+	cvShowImage("2seeWin", frame );
+	if ( (cvWaitKey(10) & 255) == 27 ) break;
+	}
 
 	 // wait for a key
- 	 cvWaitKey(0);
+ 	 //cvWaitKey(0);
 
   	// release the image
-  	cvReleaseImage(&frame);
+  	//cvReleaseCapture(&capture);
+	cvReleaseImage(&frame);
   	return 0;
 
 }
